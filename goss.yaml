@@ -1,0 +1,14 @@
+---
+port:
+  tcp6:3000:
+    listening: true
+
+process:
+  node:
+    running: true
+
+http:
+  http://localhost:3000:
+    status: 200
+    body:
+      - <title>Todo App</title>

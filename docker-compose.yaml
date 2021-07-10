@@ -1,0 +1,21 @@
+---
+version: "2.1"
+services:
+  template:
+    image: nicholaswilde/template:latest
+    container_name: template-default
+    environment:
+      - TZ=America/Los_Angeles
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    volumes:
+      - app:/app
+      - config:/config
+      - defaults:/defaults
+volumes:
+  app:
+  config:
+  defaults:

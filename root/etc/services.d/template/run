@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+cd /app/radarr/bin || exit
+
+exec \
+	s6-setuidgid abc /app/radarr/bin/Radarr \
+		-nobrowser \
+		-data=/config
