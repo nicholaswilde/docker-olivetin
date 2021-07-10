@@ -14,8 +14,8 @@ vars:
     sh: "date -u +%Y-%m-%dT%H%M%S%Z"
   BUILD_ARGS: >-
     --build-arg VERSION={{ .VERSION }}
-    --build-arg CHECKSUM={{ .CHECKSUM }}
     --build-arg BUILD_DATE={{ .BUILD_DATE }}
+  FILENAME: "{{ .VERSION }}.tar.gz"
   TAG_VERSION: "{{ .NS }}/{{ .IMAGE_NAME }}:{{ .VERSION }}-ls{{ .LS }}"
   TAG_LATEST: "{{ .NS }}/{{ .IMAGE_NAME }}:latest"
   CONTAINER: "{{ .CONTAINER_NAME }}-{{ .CONTAINER_INSTANCE }}"

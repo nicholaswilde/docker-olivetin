@@ -1,14 +1,14 @@
 ---
 port:
-  tcp6:3000:
+  tcp6:1337:
     listening: true
 
 process:
-  node:
+  OliveTin:
     running: true
 
 http:
-  http://localhost:3000:
+  http://localhost:1337:
     status: 200
     body:
-      - <title>Todo App</title>
+      - <title>OliveTin</title>
