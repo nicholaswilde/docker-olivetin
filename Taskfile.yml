@@ -6,8 +6,6 @@ dotenv: ['task.env']
 vars:
   VERSION:
     sh: cat VERSION
-  CHECKSUM:
-    sh: cat CHECKSUM
   LS:
     sh: cat LS
   BUILD_DATE:
