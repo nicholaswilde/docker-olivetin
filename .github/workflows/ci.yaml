@@ -138,7 +138,6 @@ jobs:
         with:
           build-args: |
             VERSION=${{ needs.prep.outputs.version }}
-            CHECKSUM=${{ needs.prep.outputs.checksum }}
           context: .
           file: ./Dockerfile
           load: true
@@ -188,7 +187,6 @@ jobs:
           build-args: |
             BUILD_DATE=${{ needs.prep.outputs.date }}
             VERSION=${{ needs.prep.outputs.version }}
-            CHECKSUM=${{ needs.prep.outputs.checksum }}
           tags: |
             ${{ github.repository_owner }}/${{needs.prep.outputs.repo_name}}:latest
             ${{ github.repository_owner }}/${{needs.prep.outputs.repo_name}}:${{needs.prep.outputs.tag}}
