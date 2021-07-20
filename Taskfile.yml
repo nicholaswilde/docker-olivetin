@@ -15,7 +15,9 @@ vars:
   BUILD_ARGS: >-
     --build-arg VERSION={{ .VERSION }}
     --build-arg BUILD_DATE={{ .BUILD_DATE }}
-  FILENAME: "{{ .VERSION }}.tar.gz"
+  FILENAME_AMD64: "{{ .SOURCE_REPO }}-{{ .VERSION }}-linux-amd64.tar.gz"
+  FILENAME_ARM64: "{{ .SOURCE_REPO }}-{{ .VERSION }}-linux-arm64.tar.gz"
+  FILENAME_ARM7: "{{ .SOURCE_REPO }}-{{ .VERSION }}-linux-arm.tar.gz"
   TAG_VERSION: "{{ .NS }}/{{ .IMAGE_NAME }}:{{ .VERSION }}-ls{{ .LS }}"
   TAG_LATEST: "{{ .NS }}/{{ .IMAGE_NAME }}:latest"
   CONTAINER: "{{ .CONTAINER_NAME }}-{{ .CONTAINER_INSTANCE }}"
@@ -165,7 +167,9 @@ tasks:
       - 'printf "{{ .COLOR }}* CONTAINER_INSTANCE\e[m %s\n" "{{ .CONTAINER_INSTANCE }}"'
       - 'printf "{{ .COLOR }}* CONTAINER_NAME\e[m     %s\n" "{{ .CONTAINER_NAME }}"'
       - 'printf "{{ .COLOR }}* ENV\e[m                %s\n" "{{ .ENV }}"'
-      - 'printf "{{ .COLOR }}* FILENAME\e[m           %s\n" "{{ .FILENAME }}"'
+      - 'printf "{{ .COLOR }}* FILENAME_ARM64\e[m     %s\n" "{{ .FILENAME_AMD64 }}"'
+      - 'printf "{{ .COLOR }}* FILENAME_ARM64\e[m     %s\n" "{{ .FILENAME_ARM64 }}"'
+      - 'printf "{{ .COLOR }}* FILENAME_ARM7\e[m      %s\n" "{{ .FILENAME_ARM7 }}"'
       - 'printf "{{ .COLOR }}* GIT_ROOT\e[m           %s\n" "{{ .GIT_ROOT }}"'
       - 'printf "{{ .COLOR }}* IMAGE_NAME\e[m         %s\n" "{{ .IMAGE_NAME }}"'
       - 'printf "{{ .COLOR }}* LS\e[m                 %s\n" "{{ .LS }}"'

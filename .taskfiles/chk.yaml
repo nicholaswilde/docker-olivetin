@@ -20,9 +20,20 @@ tasks:
   _release-export:
     silent: true
     cmds:
+      - test -f checksums.txt && rm checksums.txt
       - task: _dl-export
         vars:
-          URL: "https://github.com/{{ .SOURCE_ORG }}/{{ .SOURCE_REPO }}/releases/download/{{ .VERSION }}/{{ .FILENAME }}"
+          FILENAME: "{{ .FILENAME_AMD64 }}"
+          URL: "https://github.com/OliveTin/{{ .SOURCE_REPO }}/releases/download/{{ .VERSION }}/{{ .FILENAME_AMD64 }}"
+      - task: _dl-export
+        vars:
+          FILENAME: "{{ .FILENAME_ARM64 }}"
+          URL: "https://github.com/OliveTin/{{ .SOURCE_REPO }}/releases/download/{{ .VERSION }}/{{ .FILENAME_ARM64 }}"
+      - task: _dl-export
+        vars:
+          FILENAME: "{{ .FILENAME_ARM7 }}"
+          URL: "https://github.com/OliveTin/{{ .SOURCE_REPO }}/releases/download/{{ .VERSION }}/{{ .FILENAME_ARM7 }}"
+      - cat checksums.txt
     status:
       - test {{ .TYPE }} != "release"
 
@@ -40,15 +51,20 @@ tasks:
     slient: true
     cmds:
       - |
-        SUM=$(wget -q {{ .URL }} -O- | sha256sum|awk '{print $1}')
-        printf "%s" "$SUM" > CHECKSUM
-        cat CHECKSUM
+        checksum=$(wget -q {{ .URL }} -O- | sha256sum | awk '{print $1}')
+        echo $checksum  {{ .FILENAME }} >> checksums.txt
 
   _release:
     cmds:
       - task: _dl
         vars:
-          URL: "https://github.com/{{ .SOURCE_ORG }}/{{ .SOURCE_REPO }}/releases/download/{{ .VERSION }}/{{ .FILENAME }}"
+          URL: "https://github.com/OliveTin/{{ .SOURCE_REPO }}/releases/download/{{ .VERSION }}/{{ .FILENAME_AMD64 }}"
+      - task: _dl
+        vars:
+          URL: "https://github.com/OliveTin/{{ .SOURCE_REPO }}/releases/download/{{ .VERSION }}/{{ .FILENAME_ARM64 }}"
+      - task: _dl
+        vars:
+          URL: "https://github.com/OliveTin/{{ .SOURCE_REPO }}/releases/download/{{ .VERSION }}/{{ .FILENAME_ARM7 }}"
     status:
       - test {{ .TYPE }} != "release"
 
