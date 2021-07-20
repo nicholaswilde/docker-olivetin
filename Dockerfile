@@ -78,9 +78,6 @@ RUN \
 # copy local files
 COPY root/ /
 
-# copy default config file
-COPY config.yaml /defaults
-
 # ports and volumes
 EXPOSE 1337
 VOLUME /config
